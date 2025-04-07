@@ -1,16 +1,14 @@
 package com.izaiasvalentim.repository.persistence;
 
-import com.izaiasvalentim.model.Empresa;
-
 import com.izaiasvalentim.util.EntityManagerProducer;
 
 import javax.persistence.EntityManager;
 
 import java.util.List;
 
-public abstract class Repositorio<T> implements RepositorioGeral {
+public abstract class Repositorio<T> implements RepositorioGeral<T> {
 
-    private Class<T> entityClass;
+    private final Class<T> entityClass;
 
     protected final EntityManager manager;
 
@@ -21,7 +19,7 @@ public abstract class Repositorio<T> implements RepositorioGeral {
     }
 
     @Override
-    public Object save(Object entity) {
+    public T save(T entity) {
         return manager.merge(entity);
     }
 
@@ -32,12 +30,12 @@ public abstract class Repositorio<T> implements RepositorioGeral {
     }
 
     @Override
-    public Object findById(Object entityId) {
+    public T findById(Object entityId) {
         return manager.find(entityClass, entityId);
     }
 
     @Override
-    public Object update(Object entity) {
+    public T update(T entity) {
         return manager.merge(entity);
     }
 
