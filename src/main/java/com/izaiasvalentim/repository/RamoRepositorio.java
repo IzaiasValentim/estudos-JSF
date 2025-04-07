@@ -1,30 +1,21 @@
 package com.izaiasvalentim.repository;
 
 import com.izaiasvalentim.model.RamoAtividade;
+import com.izaiasvalentim.repository.persistence.Repositorio;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.io.Serializable;
 import java.util.List;
 
-public class RamoAtividades implements Serializable {
+public class RamoRepositorio extends Repositorio<RamoAtividade> {
 
-    private static final long serialVersionUID = 1L;
-
-    private EntityManager manager;
-
-    public RamoAtividades() {
+    public RamoRepositorio(){
+        super(RamoAtividade.class);
     }
 
-    public RamoAtividades(EntityManager em) {
-        this.manager = em;
-    }
-
-    public List<RamoAtividade> buscarRamoAtividade(String descricao) {
+    public List<RamoAtividade> findAll(String descricao) {
         // A consulta também pode ser realizada por meio do Criteria.
         CriteriaBuilder cb = manager.getCriteriaBuilder();
         CriteriaQuery<RamoAtividade> cq = cb.createQuery(RamoAtividade.class);
